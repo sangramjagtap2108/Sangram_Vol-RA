@@ -6,7 +6,7 @@ import './RegistrationForm.css';
 const ageGroups = ['Under 13', '13–18', '18+'];
 const mutationTypes = ['abc', 'xyz', "I don't know", "I don't want to tell"];
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -87,7 +87,7 @@ const RegistrationForm = () => {
         throw new Error(data.message || 'Registration failed');
       }
 
-      toast.success('Registration successful!');
+      toast.success('Registration successful! Please login with your credentials.');
       // Clear form - with correct field names and default values
       setFormData({
         name: '',
@@ -107,6 +107,13 @@ const RegistrationForm = () => {
         },
         avatar: '' // Changed from avatarUrl to match the form field name
       });
+      
+      // Redirect to login page after successful registration
+      if (onRegistrationSuccess) {
+        setTimeout(() => {
+          onRegistrationSuccess();
+        }, 1500); // Delay to let user see the success message
+      }
     } catch (error) {
       toast.error(error.message);
     } finally {

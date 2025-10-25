@@ -18,6 +18,10 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/user', userRoutes);
 
+// Import and use treatment routes
+const treatmentRoutes = require('./routes/treatment');
+app.use('/api/treatment', treatmentRoutes);
+
 app.get('/', (req, res) => {
   res.send('API is running');
 });

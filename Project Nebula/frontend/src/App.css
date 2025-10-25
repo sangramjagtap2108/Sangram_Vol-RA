@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+/* Auth Toggle Buttons */
+.auth-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1rem 0;
+  gap: 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.auth-toggle button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-toggle button:first-child {
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.auth-toggle button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.auth-toggle button.active {
+  background: linear-gradient(90deg, rgb(126, 255, 178) 0%, rgb(104, 231, 253) 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.auth-toggle button:hover:not(.active) {
+  background-color: #e9ecef;
+}
