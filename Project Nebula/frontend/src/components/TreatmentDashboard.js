@@ -299,9 +299,6 @@ const TreatmentDashboard = () => {
           <h1>Welcome back, {user.name}!</h1>
           <p>Ready for your treatment session?</p>
         </div>
-        <button onClick={logout} className="logout-button">
-          Logout
-        </button>
       </div>
 
       {/* Treatment Status Section */}
