@@ -1,0 +1,441 @@
+.newsletter-container {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.newsletter-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.newsletter-header h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.newsletter-subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 0;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Month Selector */
+.month-selector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.month-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.month-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.month-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Current Month Badge */
+.current-month-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px auto;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50px;
+  max-width: fit-content;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.month-icon {
+  font-size: 1.8rem;
+}
+
+.current-month-badge h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Content Tabs */
+.content-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-btn:hover {
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+/* Newsletter Content */
+.newsletter-content {
+  margin-top: 30px;
+  min-height: 400px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-header h3 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+/* Items Grid */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* Item Card Base Styles */
+.item-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Event Cards */
+.event-card {
+  border-left-color: #f093fb;
+}
+
+.event-card:hover {
+  border-left-color: #f5576c;
+}
+
+/* Resource Cards */
+.resource-card {
+  border-left-color: #43e97b;
+}
+
+.resource-card:hover {
+  border-left-color: #38f9d7;
+}
+
+/* Research Cards */
+.research-card {
+  border-left-color: #667eea;
+}
+
+.research-card:hover {
+  border-left-color: #764ba2;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-header h4 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* Badges */
+.event-type-badge,
+.resource-type-badge,
+.research-category-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.event-type-badge {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.resource-type-badge {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: #2c3e50;
+}
+
+.research-category-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Card Date and Organization */
+.card-date,
+.card-organization {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.date-icon,
+.org-icon {
+  font-size: 1.2rem;
+}
+
+/* Card Description */
+.card-description {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* Card Link */
+.card-link {
+  color: #667eea;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-link:hover {
+  color: #764ba2;
+  transform: translateX(5px);
+}
+
+/* Newsletter Footer */
+.newsletter-footer {
+  margin-top: 50px;
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.footer-info h4 {
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.footer-info p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.cfri-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: white;
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cfri-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  color: #666;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #999;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .newsletter-container {
+    padding: 20px;
+  }
+
+  .newsletter-header h1 {
+    font-size: 2rem;
+  }
+
+  .newsletter-subtitle {
+    font-size: 1rem;
+  }
+
+  .month-selector {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .month-btn {
+    width: 100%;
+  }
+
+  .current-month-badge {
+    flex-direction: column;
+    padding: 15px 20px;
+  }
+
+  .current-month-badge h2 {
+    font-size: 1.2rem;
+  }
+
+  .content-tabs {
+    flex-direction: column;
+    gap: 5px;
+    border-bottom: none;
+  }
+
+  .tab-btn {
+    width: 100%;
+    text-align: center;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+  }
+
+  .tab-btn.active {
+    border-left-color: #667eea;
+    border-bottom-color: transparent;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-footer {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .month-icon {
+    font-size: 1.5rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-card {
+    padding: 20px;
+  }
+}

@@ -1,5 +1,11 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+// Generate JWT token
+const generateToken = (userId) => {
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
+};
 
 // Basic payload validation function
 function validateUserPayload(payload) {
@@ -67,6 +73,65 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'An error occurred during registration. Please try again.' 
+    });
+  }
+};
+
+exports.loginUser = async (req, res) => {
+  console.log('Login attempt for:', req.body.email);
+  
+  const { email, password } = req.body;
+
+  // Basic validation
+  if (!email || !password) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Email and password are required' 
+    });
+  }
+
+  try {
+    // Find user by email
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      return res.status(401).json({ 
+        success: false, 
+        message: 'Invalid email or password' 
+      });
+    }
+
+    // Verify password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ 
+        success: false, 
+        message: 'Invalid email or password' 
+      });
+    }
+
+    // Update last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Generate JWT token
+    const token = generateToken(user._id);
+
+    // Send response without password
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      token,
+      user: userResponse
+    });
+
+  } catch (error) {
+    console.error('Login error:', error.message);
+    res.status(500).json({ 
+      success: false, 
+      message: 'An error occurred during login. Please try again.' 
     });
   }
 };

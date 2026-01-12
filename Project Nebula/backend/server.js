@@ -18,6 +18,22 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/user', userRoutes);
 
+// Import and use treatment routes
+const treatmentRoutes = require('./routes/treatment');
+app.use('/api/treatment', treatmentRoutes);
+
+// Import and use event routes
+const eventRoutes = require('./routes/eventRoutes');
+app.use('/api', eventRoutes);
+
+// Import and use educational resource routes
+const educationalResourceRoutes = require('./routes/educationalResourceRoutes');
+app.use('/api', educationalResourceRoutes);
+
+// Import and use research update routes
+const researchUpdateRoutes = require('./routes/researchUpdateRoutes');
+app.use('/api', researchUpdateRoutes);
+
 app.get('/', (req, res) => {
   res.send('API is running');
 });
