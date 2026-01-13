@@ -6,7 +6,7 @@ import './RegistrationForm.css';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const ageGroups = ['Under 13', '13–18', '18+'];
-const mutationTypes = ['abc', 'xyz', "I don't know", "I don't want to tell"];
+const mutationTypes = ["I don't know", "I don't want to tell"];
 
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [formData, setFormData] = useState({
@@ -65,6 +65,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
   // eslint-disable-next-line no-unused-vars
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -235,20 +236,30 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         <label className="form-label">Favorite Videos</label>
       </div>
 
-      <div className="form-group">
-        <label>Type of Mutation *</label>
-        <select
+      <div className="form-group mutation-group">
+        <input
+          type="text"
           name="typeOfMutation"
           value={formData.typeOfMutation}
           onChange={handleChange}
           className="form-control"
+          placeholder=" "
           required
-        >
-          <option value="" disabled>Select Type of Mutation *</option>
+        />
+        <label className="form-label">Type of Mutation</label>
+        <div className="mutation-options">
+          <span className="option-label">Or select:</span>
           {mutationTypes.map(type => (
-            <option key={type} value={type}>{type}</option>
+            <button
+              key={type}
+              type="button"
+              className="mutation-option-btn"
+              onClick={() => setFormData(prev => ({ ...prev, typeOfMutation: type }))}
+            >
+              {type}
+            </button>
           ))}
-        </select>
+        </div>
       </div>
 
       <div className="form-group">
@@ -273,6 +284,9 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         />
         <label htmlFor="privacy">
           Make my profile public
+          <span className="info-tooltip" title="If enabled, other users can view your profile information including your interests and activities. Your email and password will always remain private.">
+            ℹ️
+          </span>
         </label>
       </div>
 
@@ -286,7 +300,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           id="terms"
         />
         <label htmlFor="terms">
-          I agree all statements in <a href="/terms" className="terms-link">Terms of service</a>
+          I agree all statements in <button type="button" onClick={(e) => { e.preventDefault(); setShowTerms(true); }} className="terms-link">Terms of service</button>
         </label>
       </div>
 
@@ -298,6 +312,37 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         Have already an account? <a href="/login">Login here</a>
       </p>
     </form>
+    
+    {showTerms && (
+      <div className="modal-overlay" onClick={() => setShowTerms(false)}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <h3>Terms of Service</h3>
+          <div className="terms-text">
+            <h4>1. Acceptance of Terms</h4>
+            <p>By registering and using Project Nebula, you agree to these Terms of Service.</p>
+            
+            <h4>2. Privacy and Data Protection</h4>
+            <p>We are committed to protecting your privacy. Your personal information, including email and password, will never be shared with third parties without your consent.</p>
+            
+            <h4>3. User Conduct</h4>
+            <p>Users must maintain respectful communication and not engage in harassment, hate speech, or any harmful behavior towards other community members.</p>
+            
+            <h4>4. Public Profiles</h4>
+            <p>If you choose to make your profile public, your name, interests, and activities will be visible to other users. You can change this setting at any time.</p>
+            
+            <h4>5. Content</h4>
+            <p>Users are responsible for the content they share. We reserve the right to remove content that violates our community guidelines.</p>
+            
+            <h4>6. Account Security</h4>
+            <p>You are responsible for maintaining the confidentiality of your account credentials.</p>
+            
+            <h4>7. Changes to Terms</h4>
+            <p>We may update these terms from time to time. Continued use of the platform constitutes acceptance of updated terms.</p>
+          </div>
+          <button onClick={() => setShowTerms(false)} className="close-modal-btn">Close</button>
+        </div>
+      </div>
+    )}
     </>
   );
 };
