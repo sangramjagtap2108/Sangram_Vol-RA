@@ -5,9 +5,6 @@ import './RegistrationForm.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-const ageGroups = ['Under 13', '13–18', '18+'];
-const mutationTypes = ['abc', 'xyz', "I don't know", "I don't want to tell"];
-
 const RegistrationForm = ({ onRegistrationSuccess }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -184,21 +181,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       </div>
 
       <div className="form-group">
-        <select
-          name="ageGroup"
-          value={formData.ageGroup}
-          onChange={handleChange}
-          className="form-control"
-          required
-        >
-          <option value="" disabled>Age Group</option>
-          {ageGroups.map(group => (
-            <option key={group} value={group}>{group}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="form-group">
         <input
           type="text"
           name="interests"
@@ -232,21 +214,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           placeholder=" "
         />
         <label className="form-label">Favorite Videos</label>
-      </div>
-
-      <div className="form-group">
-        <select
-          name="typeOfMutation"
-          value={formData.typeOfMutation}
-          onChange={handleChange}
-          className="form-control"
-          required
-        >
-          <option value="" disabled>Mutation Type</option>
-          {mutationTypes.map(type => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
       </div>
 
       <div className="form-group">

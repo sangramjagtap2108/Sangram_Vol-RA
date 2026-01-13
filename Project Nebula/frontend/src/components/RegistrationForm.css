@@ -140,6 +140,15 @@ select.form-control:focus ~ .form-label {
   background: white;
 }
 
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: left;
+}
+
 .form-group .form-label-select {
   position: absolute;
   left: 0.75rem;
