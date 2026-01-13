@@ -4,6 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ResearchUpdates.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 // Initial seed research updates data
 const initialUpdates = [
   {
@@ -106,7 +108,7 @@ const ResearchUpdates = () => {
 
   const fetchUpdates = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/research-updates');
+      const response = await fetch(`${API_URL}/api/research-updates`);
       const data = await response.json();
       
       if (data.success && data.updates.length > 0) {
@@ -146,7 +148,7 @@ const ResearchUpdates = () => {
         tags: newUpdate.tags ? newUpdate.tags.split(',').map(tag => tag.trim()) : []
       };
 
-      const response = await fetch('http://localhost:5000/api/research-updates', {
+      const response = await fetch(`${API_URL}/api/research-updates`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

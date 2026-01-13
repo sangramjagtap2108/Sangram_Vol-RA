@@ -3,6 +3,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './RegistrationForm.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const ageGroups = ['Under 13', '13–18', '18+'];
 const mutationTypes = ['abc', 'xyz', "I don't know", "I don't want to tell"];
 
@@ -75,7 +77,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/user/register', {
+      const response = await fetch(`${API_URL}/api/user/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

@@ -4,6 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Events.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 // Initial seed events data
 const initialEvents = [
   {
@@ -306,7 +308,7 @@ const Events = () => {
   const fetchEvents = async () => {
     try {
       // First, try to fetch from backend
-      const response = await fetch('http://localhost:5000/api/events');
+      const response = await fetch(`${API_URL}/api/events`);
       const data = await response.json();
       
       if (data.success && data.events.length > 0) {
@@ -329,7 +331,7 @@ const Events = () => {
 
   const fetchMyEvents = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/my-events', {
+      const response = await fetch(`${API_URL}/api/my-events`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -385,7 +387,7 @@ const Events = () => {
 
       console.log('Sending event data:', eventData);
 
-      const response = await fetch('http://localhost:5000/api/events', {
+      const response = await fetch(`${API_URL}/api/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -423,7 +425,7 @@ const Events = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}/register`, {
+      const response = await fetch(`${API_URL}/api/events/${eventId}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -453,7 +455,7 @@ const Events = () => {
   // eslint-disable-next-line no-unused-vars
   const handleUnregister = async (eventId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}/unregister`, {
+      const response = await fetch(`${API_URL}/api/events/${eventId}/unregister`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

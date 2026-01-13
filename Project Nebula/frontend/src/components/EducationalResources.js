@@ -4,6 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './EducationalResources.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 // Initial seed resources data
 const initialResources = [
   {
@@ -113,7 +115,7 @@ const EducationalResources = () => {
 
   const fetchResources = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/resources');
+      const response = await fetch(`${API_URL}/api/resources`);
       const data = await response.json();
       
       if (data.success && data.resources.length > 0) {
@@ -153,7 +155,7 @@ const EducationalResources = () => {
         tags: newResource.tags ? newResource.tags.split(',').map(tag => tag.trim()) : []
       };
 
-      const response = await fetch('http://localhost:5000/api/resources', {
+      const response = await fetch(`${API_URL}/api/resources`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

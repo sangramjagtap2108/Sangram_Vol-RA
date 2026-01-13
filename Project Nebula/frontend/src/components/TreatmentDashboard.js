@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import './TreatmentDashboard.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const TreatmentDashboard = () => {
   const { user } = useAuth();
   
@@ -119,7 +121,7 @@ const TreatmentDashboard = () => {
   const scheduleReminderEmail = async (treatmentDateTime, duration) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/treatment/schedule-reminder', {
+      const response = await fetch(`${API_URL}/api/treatment/schedule-reminder`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
