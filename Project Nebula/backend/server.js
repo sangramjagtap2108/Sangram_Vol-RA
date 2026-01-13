@@ -6,7 +6,13 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://project-nebula-frontend-production.up.railway.app'
+  ],
+  credentials: true
+}));
 
 // MongoDB connection (will update with URI later)
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/nebula';
