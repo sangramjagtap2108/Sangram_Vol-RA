@@ -300,6 +300,7 @@ const Events = () => {
     if (token) {
       fetchMyEvents();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const fetchEvents = async () => {
@@ -414,6 +415,7 @@ const Events = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleRegister = async (eventId) => {
     if (!token) {
       toast.error('Please login to register for events');
@@ -448,6 +450,7 @@ const Events = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleUnregister = async (eventId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/events/${eventId}/unregister`, {
@@ -493,6 +496,7 @@ const Events = () => {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const isUserRegistered = (event) => {
     if (!user) return false;
     return event.registeredAttendees.some(

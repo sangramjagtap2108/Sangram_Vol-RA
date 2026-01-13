@@ -79,7 +79,7 @@ const initialUpdates = [
 ];
 
 const ResearchUpdates = () => {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const [updates, setUpdates] = useState(initialUpdates);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);

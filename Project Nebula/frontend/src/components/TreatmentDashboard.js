@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import './TreatmentDashboard.css';
 
 const TreatmentDashboard = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   
   // Treatment Status State
   const [isInTreatment, setIsInTreatment] = useState(false);
@@ -178,6 +178,7 @@ const TreatmentDashboard = () => {
     return nextTime.toISOString().slice(0, 16);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleHoursChange = (hours) => {
     const now = new Date();
     const nextTime = new Date(now.getTime() + hours * 60 * 60 * 1000);

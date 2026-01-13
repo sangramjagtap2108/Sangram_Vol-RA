@@ -87,7 +87,7 @@ const initialResources = [
 ];
 
 const EducationalResources = () => {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const [resources, setResources] = useState(initialResources);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);

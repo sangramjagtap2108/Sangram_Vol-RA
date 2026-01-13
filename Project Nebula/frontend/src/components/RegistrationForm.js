@@ -61,12 +61,10 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }
   };
 
-  const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
