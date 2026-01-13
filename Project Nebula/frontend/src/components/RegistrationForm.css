@@ -144,7 +144,7 @@ select.form-control:focus ~ .form-label {
   display: block;
   margin-bottom: 0.5rem;
   color: #666;
-  font-size: 0.75rem;
+  font-size: 0.35rem;
   font-weight: 500;
   text-align: left;
 }
