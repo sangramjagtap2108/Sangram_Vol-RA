@@ -14,6 +14,7 @@ const TreatmentDashboard = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timerProgress, setTimerProgress] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [completedSessions, setCompletedSessions] = useState(0);
 
   // Custom Duration State

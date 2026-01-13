@@ -61,6 +61,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
