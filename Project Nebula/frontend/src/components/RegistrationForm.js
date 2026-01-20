@@ -21,11 +21,12 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       videos: []
     },
     typeOfMutation: '',
+    customMutation: '',
     termsAccepted: false,
     privacySettings: {
       isProfilePublic: false
     },
-    avatarUrl: ''
+    avatar: ''
   });
 
   // For multi-value fields
@@ -76,12 +77,26 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       return;
     }
 
+    // Check if custom mutation is selected but not filled
+    if (formData.typeOfMutation === 'custom' && !formData.customMutation?.trim()) {
+      toast.error('Please enter your custom mutation type');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
+      // Prepare data for submission
+      const submissionData = { ...formData };
+      if (formData.typeOfMutation === 'custom' && formData.customMutation) {
+        submissionData.typeOfMutation = formData.customMutation;
+      }
+      delete submissionData.customMutation;
+      delete submissionData.confirmPassword;
+
       const response = await fetch(`${API_URL}/api/user/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(submissionData)
       });
       const data = await response.json();
       
@@ -103,6 +118,7 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           videos: []
         },
         typeOfMutation: '',
+        customMutation: '',
         termsAccepted: false,
         privacySettings: {
           isProfilePublic: false
@@ -185,15 +201,15 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
       </div>
 
       <div className="form-group">
-        <label>Age Group *</label>
+        <label className="select-label">Age Group *</label>
         <select
           name="ageGroup"
           value={formData.ageGroup}
           onChange={handleChange}
-          className="form-control"
+          className="form-control select-dropdown"
           required
         >
-          <option value="" disabled>Select Age Group *</option>
+          <option value="" disabled hidden>Select Age Group</option>
           {ageGroups.map(group => (
             <option key={group} value={group}>{group}</option>
           ))}
@@ -236,31 +252,37 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         <label className="form-label">Favorite Videos</label>
       </div>
 
-      <div className="form-group mutation-group">
-        <input
-          type="text"
+      <div className="form-group">
+        <label>Type of Mutation *</label>
+        <select
           name="typeOfMutation"
           value={formData.typeOfMutation}
           onChange={handleChange}
           className="form-control"
-          placeholder=" "
           required
-        />
-        <label className="form-label">Type of Mutation</label>
-        <div className="mutation-options">
-          <span className="option-label">Or select:</span>
+        >
+          <option value="" disabled>Select Mutation Type *</option>
+          <option value="custom">Enter custom mutation</option>
           {mutationTypes.map(type => (
-            <button
-              key={type}
-              type="button"
-              className="mutation-option-btn"
-              onClick={() => setFormData(prev => ({ ...prev, typeOfMutation: type }))}
-            >
-              {type}
-            </button>
+            <option key={type} value={type}>{type}</option>
           ))}
-        </div>
+        </select>
       </div>
+
+      {formData.typeOfMutation === 'custom' && (
+        <div className="form-group">
+          <input
+            type="text"
+            name="customMutation"
+            value={formData.customMutation || ''}
+            onChange={(e) => setFormData(prev => ({ ...prev, customMutation: e.target.value }))}
+            className="form-control"
+            placeholder=" "
+            required
+          />
+          <label className="form-label">Enter Your Mutation Type</label>
+        </div>
+      )}
 
       <div className="form-group">
         <input

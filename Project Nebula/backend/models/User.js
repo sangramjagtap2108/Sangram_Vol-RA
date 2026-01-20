@@ -40,7 +40,6 @@ const UserSchema = new mongoose.Schema({
   },
   typeOfMutation: {
     type: String,
-    enum: ['abc', 'xyz', 'I don\'t know', 'I don\'t want to tell'],
     required: true
   },
   termsAccepted: {

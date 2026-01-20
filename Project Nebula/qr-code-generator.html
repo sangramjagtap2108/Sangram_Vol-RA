@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nebula - QR Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .url {
+            color: #666;
+            margin-bottom: 30px;
+            word-break: break-all;
+        }
+        #qrcode {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        .instructions {
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Project Nebula</h1>
+        <p class="url">https://project-nebula-frontend-production.up.railway.app/</p>
+        <div id="qrcode"></div>
+        <div>
+            <button onclick="downloadQR()">📥 Download QR Code</button>
+            <button onclick="printQR()">🖨️ Print QR Code</button>
+        </div>
+        <p class="instructions">
+            Scan this QR code with any smartphone camera to instantly access the Project Nebula application!
+        </p>
+    </div>
+
+    <script>
+        // Generate QR Code
+        const qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "https://project-nebula-frontend-production.up.railway.app/",
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // Download QR Code as PNG
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (canvas) {
+                const url = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = 'project-nebula-qr-code.png';
+                link.href = url;
+                link.click();
+            }
+        }
+
+        // Print QR Code
+        function printQR() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
