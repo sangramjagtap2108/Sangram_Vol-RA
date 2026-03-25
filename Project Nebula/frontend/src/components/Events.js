@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -297,15 +297,7 @@ const Events = () => {
     }
   }, [user, showCreateModal]);
 
-  useEffect(() => {
-    fetchEvents();
-    if (token) {
-      fetchMyEvents();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       // First, try to fetch from backend
       const response = await fetch(`${API_URL}/api/events`);
@@ -327,9 +319,9 @@ const Events = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchMyEvents = async () => {
+  const fetchMyEvents = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/api/my-events`, {
         headers: {
@@ -344,7 +336,14 @@ const Events = () => {
     } catch (error) {
       console.error('Error fetching my events:', error);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchEvents();
+    if (token) {
+      fetchMyEvents();
+    }
+  }, [token, fetchEvents, fetchMyEvents]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -417,66 +416,6 @@ const Events = () => {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const handleRegister = async (eventId) => {
-    if (!token) {
-      toast.error('Please login to register for events');
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/api/events/${eventId}/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          userName: user.name,
-          userEmail: user.email
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        toast.success('Successfully registered for event!');
-        fetchEvents();
-        fetchMyEvents();
-      } else {
-        toast.error(data.message || 'Failed to register');
-      }
-    } catch (error) {
-      console.error('Error registering:', error);
-      toast.error('Failed to register for event');
-    }
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const handleUnregister = async (eventId) => {
-    try {
-      const response = await fetch(`${API_URL}/api/events/${eventId}/unregister`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        toast.success('Successfully unregistered from event');
-        fetchEvents();
-        fetchMyEvents();
-      } else {
-        toast.error(data.message || 'Failed to unregister');
-      }
-    } catch (error) {
-      console.error('Error unregistering:', error);
-      toast.error('Failed to unregister from event');
-    }
-  };
-
   const resetForm = () => {
     setNewEvent({
       title: '',
@@ -496,14 +435,6 @@ const Events = () => {
       tags: '',
       imageUrl: ''
     });
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const isUserRegistered = (event) => {
-    if (!user) return false;
-    return event.registeredAttendees.some(
-      attendee => attendee.userEmail === user.email
-    );
   };
 
   const formatDate = (dateString) => {

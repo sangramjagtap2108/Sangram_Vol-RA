@@ -64,7 +64,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
 
@@ -326,8 +325,8 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
         </label>
       </div>
 
-      <button type="submit" className="submit-button">
-        REGISTER
+      <button type="submit" className="submit-button" disabled={isSubmitting}>
+        {isSubmitting ? 'REGISTERING...' : 'REGISTER'}
       </button>
 
       <p className="login-link">

@@ -16,7 +16,6 @@ const TreatmentDashboard = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timerProgress, setTimerProgress] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [completedSessions, setCompletedSessions] = useState(0);
 
   // Custom Duration State
@@ -179,17 +178,6 @@ const TreatmentDashboard = () => {
     const now = new Date();
     const nextTime = new Date(now.getTime() + treatmentPlan.nextTreatmentHours * 60 * 60 * 1000);
     return nextTime.toISOString().slice(0, 16);
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const handleHoursChange = (hours) => {
-    const now = new Date();
-    const nextTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
-    setTreatmentPlan(prev => ({
-      ...prev,
-      nextTreatmentHours: hours,
-      nextTreatmentDateTime: nextTime.toISOString().slice(0, 16)
-    }));
   };
 
   const saveTreatmentPlan = () => {
@@ -417,6 +405,7 @@ const TreatmentDashboard = () => {
               <div className="timer-info">
                 <p>Timer will use your selected treatment duration: <strong>{treatmentDuration} minutes</strong></p>
                 <p>Change the duration in the Treatment Status section above.</p>
+                <p>Completed sessions this visit: <strong>{completedSessions}</strong></p>
               </div>
             </div>
           )}
