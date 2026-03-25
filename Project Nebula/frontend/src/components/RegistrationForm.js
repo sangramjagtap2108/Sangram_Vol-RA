@@ -167,7 +167,6 @@ const RegistrationForm = ({ onRegistrationSuccess }) => {
           placeholder=" "
           required
           autoComplete="off"
-          autoFill="off"
         />
         <label className="form-label">Your Email</label>
       </div>

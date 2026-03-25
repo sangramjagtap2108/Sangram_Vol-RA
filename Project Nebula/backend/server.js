@@ -6,13 +6,39 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://project-nebula-frontend-production.up.railway.app'
-  ],
-  credentials: true
-}));
+
+const envAllowedOrigins = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const defaultAllowedOrigins = [
+  'http://localhost:3000',
+  'https://project-nebula-frontend-production.up.railway.app'
+];
+
+const allowedOrigins = new Set([...defaultAllowedOrigins, ...envAllowedOrigins]);
+
+const corsOptions = {
+  origin(origin, callback) {
+    // Allow non-browser clients (no Origin header) and same-origin server calls.
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.has(origin) || /^https:\/\/[a-z0-9-]+\.up\.railway\.app$/i.test(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // MongoDB connection (will update with URI later)
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/nebula';
