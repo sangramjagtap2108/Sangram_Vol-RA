@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
+import LandingPage from './components/LandingPage';
 import TreatmentDashboard from './components/TreatmentDashboard';
 import Events from './components/Events';
 import EducationalResources from './components/EducationalResources';
@@ -13,6 +14,7 @@ import './App.css';
 const AuthenticatedApp = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const [showLogin, setShowLogin] = useState(true);
+  const [showLanding, setShowLanding] = useState(true);
   const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'events', 'resources', 'research-updates', 'feedback', 'newsletter'
 
   if (isAuthenticated) {
@@ -76,6 +78,10 @@ const AuthenticatedApp = () => {
         </div>
       </div>
     );
+  }
+
+  if (showLanding) {
+    return <LandingPage onProceed={() => setShowLanding(false)} />;
   }
 
   return (

@@ -1,0 +1,194 @@
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.landing-container {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.landing-content {
+  padding: 4rem 3rem;
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.landing-headline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #667eea;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.landing-subtitle {
+  font-size: 1.5rem;
+  color: #764ba2;
+  margin: 0;
+  font-weight: 500;
+}
+
+.landing-description {
+  margin-bottom: 3rem;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.key-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.point {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-left: 4px solid #667eea;
+  border-radius: 5px;
+}
+
+.point p {
+  margin: 0;
+  color: #555;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.point strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.registration-info {
+  background: linear-gradient(135deg, rgba(126, 255, 178, 0.1) 0%, rgba(104, 231, 253, 0.1) 100%);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.registration-info h2 {
+  margin: 0 0 0.5rem 0;
+  color: #667eea;
+  font-size: 1.5rem;
+}
+
+.registration-info > p {
+  margin: 0 0 2rem 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgb(126, 255, 178) 0%, rgb(104, 231, 253) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.step-content p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.cta-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgb(126, 255, 178) 0%, rgb(104, 231, 253) 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(126, 255, 178, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(126, 255, 178, 0.4);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .landing-headline {
+    font-size: 2rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .key-points {
+    gap: 1rem;
+  }
+
+  .point {
+    padding: 1rem;
+  }
+
+  .step {
+    gap: 1rem;
+  }
+
+  .step-number {
+    min-width: 45px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}
